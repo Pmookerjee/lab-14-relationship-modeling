@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const accessorySchema = new mongoose.Schema({
 
-  parts: {type: Array}
+  parts: { type: Array }
 
 });
 

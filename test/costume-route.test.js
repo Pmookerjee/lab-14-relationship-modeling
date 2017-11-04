@@ -123,7 +123,7 @@ describe('PUT /api/1.0/costume/:id', () => {
       });
   });
 
-  test('it should return a 404 when no body is provided', () => {
+  test('it should return a 404 when a bad ID is provided', () => {
 
     let badID = 12345;
 
