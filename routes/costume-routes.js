@@ -7,7 +7,7 @@ const Costume = require(__dirname + '/../models/costume');
 const costumeRouter = module.exports = express.Router();
 
 
-costumeRouter.post('/costume', jsonParser, (req, res) => {
+costumeRouter.post('/costume', jsonParser, (req, res, next) => {
 
   let newCostume = new Costume(req.body);
 
@@ -28,6 +28,17 @@ costumeRouter.get('/costume/:id', (req, res, next) => {
   Costume.findOne({_id: req.params.id})
     .then(costume => res.send(costume))
     .catch(err => next({statusCode: 404, message: 'Not Found', error: err}));
+});
+
+costumeRouter.put('/costume/:id', jsonParser, (req, res, next) => {
+
+  if(Object.keys(req.body).length === 0 || !req.params.id) {
+    next({statusCode:400, message: 'Bad Request'});
+  }
+  delete req.body._id;
+  Costume.findOneAndUpdate({_id: req.params.id}, req.body)
+    .then(() => res.send('Costume has been updated!'))
+    .catch(err => next({statusCode: 404, message: 'Bad Request', error: err}));
 });
 
 
