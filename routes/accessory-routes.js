@@ -1,8 +1,8 @@
 'use strict';
 
-const express = require('express');
-const jsonParser = require('body-parser').json();
 const Accessory = require(__dirname + '/../models/accessory');
+const jsonParser = require('body-parser').json();
+const express = require('express');
 
 const accessoryRouter = module.exports = express.Router();
 

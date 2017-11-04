@@ -3,47 +3,41 @@
 const mongoose = require('mongoose');
 const Accessory = require('./accessory');
 
-const costumeSchema = mongoose.Schema({
+const costumeSchema = new mongoose.Schema({
 
-  name: {type: String, required: true, unique: true},
+  name: {type: String},
   profile: String,
   parts: {type: mongoose.Schema.Types.ObjectId, ref: 'Accessory'},
-  createDate: {type: Date, default: Date.now},
+  createDate: {type: Date, default: Date.now}
 
 });
 
-costumeSchema.pre('save', (done) => {
+costumeSchema.pre('save', function(done) {
 
-  console.log('hiiiiiiiiiiii')
-  Accessory.findByID(this.parts)
-    .then(parts => {
-
-      console.log('parts is ', parts);
-
-      if(parts) return parts;
-      else {
-        let newParts = new Accessory({});
-        return newParts.save();
+  Accessory.findById(this.parts)
+    .then( acc => {
+      if (! acc) {
+        let newAcc = new Accessory({costume: this._id, parts:[]});
+        return newAcc.save();
       }
-
+      else { return acc; }
     })
-    .then(parts => {
-      this.parts = parts._id;
+    .then(acc => {
+      this.parts = acc._id;
       done();
     })
-    .catch(err => { console.log(err); done(); });
+    .catch(done);
+
 });
 
-costumeSchema.pre('findOne', () => {
+costumeSchema.pre('findOne', function(done) {
 
   this.populate({
 
-    path: 'parts',
-    populate: {
-      path: 'accessories',
-    },
-  });
-});
+    path: 'parts'
 
+  });
+  done();
+});
 
 const Costume = module.exports = mongoose.model('Costume', costumeSchema);
