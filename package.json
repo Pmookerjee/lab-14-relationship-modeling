@@ -1,0 +1,31 @@
+{
+  "name": "lab-14-relationship-modeling",
+  "version": "1.0.0",
+  "description": "![CF](https://camo.githubusercontent.com/70edab54bba80edb7493cad3135e9606781cbb6b/687474703a2f2f692e696d6775722e636f6d2f377635415363382e706e67) 14: Mongo/Express 2 Resource API ===",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pmookerjee/lab-14-relationship-modeling.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pmookerjee/lab-14-relationship-modeling/issues"
+  },
+  "homepage": "https://github.com/Pmookerjee/lab-14-relationship-modeling#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "mongodb": "^2.2.33",
+    "mongoose": "^4.12.6"
+  },
+  "devDependencies": {
+    "jest": "^21.2.1",
+    "superagent": "^3.8.0"
+  }
+}
